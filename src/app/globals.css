@@ -7,7 +7,7 @@
 } */
 
 body {
-  background-color: grey;
+  background-color: #171717;
 }
 
 .work-sans {
@@ -15,4 +15,15 @@ body {
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+}
+
+.gradient {
+  background: rgb(156, 162, 251);
+  background: linear-gradient(
+    90deg,
+    rgba(156, 162, 251, 1) 17%,
+    rgba(11, 3, 146, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

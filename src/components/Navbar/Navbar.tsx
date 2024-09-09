@@ -1,11 +1,9 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 import { PricingContent, AboutContent } from "./NavbarContent";
 import { NavbarLink } from "./NavbarLink";
-import logo from "@/public/logo.png";
 
 <style>
   @import
@@ -15,10 +13,8 @@ import logo from "@/public/logo.png";
 const Navbar = () => {
   return (
     <>
-      <div className="flex h-[60px] gap-10 items-center justify-around bg-neutral-900">
-        <Image src={logo} alt="main-logo" width={"150"} />
-
-        <div className="flex gap-10 items-end">
+      <div className="flex h-[60px] gap-10 items-center justify-evenly bg-neutral-900">
+        <div className="flex gap-10 items-end w-[800px] justify-between">
           <NavbarLink href="#" NavbarContent={PricingContent}>
             Pricing
           </NavbarLink>
