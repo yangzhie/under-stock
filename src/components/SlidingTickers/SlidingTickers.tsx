@@ -8,6 +8,7 @@ function SlidingTickers() {
       height="16"
       viewBox="0 0 24 24"
       fill="green"
+      style={{ display: "inline-block", verticalAlign: "middle" }}
     >
       <polygon points="12,4 4,20 20,20" />
     </svg>
