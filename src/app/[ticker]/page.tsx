@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Info from "@/components/Info/Info";
 import Graph from "@/components/Graph/Graph";
 import Tabs from "@/components/Tabs/Tabs";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
       <div className="flex flex-col items-center">
         <Info />
         <Graph />
+        <Tabs />
       </div>
+      <Footer />
     </>
   );
 }

@@ -32,8 +32,8 @@ function Info() {
         <div className="flex items-center justify-between">
           <div className="text-[30px]">Big Stock Test</div>
           <div>
-            <button className="group relative inline-flex h-8 items-center justify-center overflow-hidden rounded-md bg-indigo-600 px-4 font-medium text-neutral-200 duration-500">
-              <div className="relative inline-flex -translate-x-0 items-center transition group-hover:-translate-x-6">
+            <button className="group inline-flex h-8 items-center justify-center overflow-hidden rounded-md bg-indigo-600 px-4 font-medium text-neutral-200 duration-500">
+              <div className="inline-flex -translate-x-0 items-center transition group-hover:-translate-x-6">
                 <div className="absolute translate-x-0 opacity-100 transition group-hover:-translate-x-6 group-hover:opacity-0">
                   <svg
                     width="15"
