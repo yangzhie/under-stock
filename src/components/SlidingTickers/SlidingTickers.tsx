@@ -27,7 +27,7 @@ function SlidingTickers() {
   );
   return (
     <>
-      <div className="flex justify-evenly gap-8 mt-6 items-center">
+      <div className="flex justify-evenly gap-8 mt-10 items-center">
         <div className="text-white p-1 px-2 rounded-md bg-gray-800">
           S&P 500 5,471 UP +1.16%
         </div>
