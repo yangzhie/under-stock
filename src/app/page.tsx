@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Head from "@/components/Head/Head";
 import SlidingTickers from "@/components/SlidingTickers/SlidingTickers";
 import MainContent from "@/components/MainContent/MainContent"
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <SlidingTickers />
       <MainContent />
+      <Footer />
     </>
   );
 }
