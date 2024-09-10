@@ -13,6 +13,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col items-center">
         <Info />
+        <Graph />
       </div>
     </>
   );
