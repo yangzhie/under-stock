@@ -3,7 +3,7 @@ import React from "react";
 function Graph() {
   return (
     <>
-      <div className="text-white flex flex-col w-1/2">
+      <div className="text-white flex flex-col w-[700px]">
         <div className="h-[300px] mt-[20px]">Graph</div>
         <div className="flex justify-center gap-5">
           <button

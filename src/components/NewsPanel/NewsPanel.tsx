@@ -1,100 +1,48 @@
-import React from "react";
+"use client";
 
-function NewsPanel() {
-  const clock = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="13"
-      viewBox="0 0 24 24"
-      fill="white"
-      style={{ display: "inline-block" }}
-    >
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="white"
-        strokeWidth="2"
-        fill="none"
-      />
-      <line x1="12" y1="12" x2="12" y2="7" stroke="white" strokeWidth="2" />
-      <line x1="12" y1="12" x2="16" y2="12" stroke="white" strokeWidth="2" />
-    </svg>
-  );
+import React, { useEffect, useState } from "react";
+import News from "./News";
+
+interface NewsPanelProps {
+  ticker: string;
+}
+
+interface News {
+  title: string;
+  article_url: string;
+  published_utc: string;
+}
+
+function NewsPanel({ ticker }: NewsPanelProps) {
+  const [news, setNews] = useState<News[]>([]);
+  const polygonAPIKey = process.env.NEXT_PUBLIC_POLYGON;
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const upTicker = ticker.toUpperCase()
+        const response = await fetch(
+          `https://api.polygon.io/v2/reference/news?ticker=${upTicker}&limit=5&apiKey=${polygonAPIKey}`
+        );
+        const newsData = await response.json();
+
+        setNews(newsData.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchNews();
+  }, [ticker]);
   return (
     <>
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
-
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
-
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
-
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
-
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
-
-      <div className="mt-3">
-        <div className="text-[12px] flex items-center">
-          {clock}
-          <span className="ml-[5px]">12:54pm</span>
-        </div>
-        <div className="p-1">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita,
-          molestias reiciendis! Veniam aborum.
-        </div>
-        <hr className="border border-[#9ca2fb] mt-2" />
-      </div>
+      {news.map((element, index: number) => (
+        <News
+          key={index}
+          newsDate={element.published_utc}
+          newsContent={element.title}
+          newsURL={element.article_url}
+        />
+      ))}
     </>
   );
 }
