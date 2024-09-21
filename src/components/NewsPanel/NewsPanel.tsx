@@ -15,7 +15,7 @@ interface News {
 
 function NewsPanel({ ticker }: NewsPanelProps) {
   const [news, setNews] = useState<News[]>([]);
-  const polygonAPIKey = process.env.NEXT_PUBLIC_POLYGON;
+  const polygonAPIKey = process.env.NEXT_PUBLIC_POLYGON_NEWS;
 
   useEffect(() => {
     const fetchNews = async () => {

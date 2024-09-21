@@ -16,6 +16,7 @@ interface Data {
   close_price: number;
   day_change: number;
   volume: number;
+  currency: string;
 }
 
 interface InfoProps {
@@ -49,7 +50,6 @@ const redTriangle = (
 );
 
 function Info({ data }: InfoProps) {
-  console.log(data);
   if (!data) {
     return <div>Loading...</div>;
   }

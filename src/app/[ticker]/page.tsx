@@ -23,12 +23,13 @@ interface StockData {
   close_price: number;
   day_change: number;
   volume: number;
+  currency: string;
 }
 
 export default function StockPage({ params }: { params: { ticker: string } }) {
   const { ticker } = params;
   const [stockData, setStockData] = useState<StockData | null>(null);
-  const stockDataAPIKey = process.env.NEXT_PUBLIC_STOCKDATA_100PERDAY;
+  const stockDataAPIKey = process.env.NEXT_PUBLIC_STOCKDATA_100PERDAY_MAIN;
   const router = useRouter();
 
   useEffect(() => {
@@ -60,12 +61,12 @@ export default function StockPage({ params }: { params: { ticker: string } }) {
           <Navbar />
         </div>
         <div className="flex flex-col items-center">
-          <Info data={stockData} />
-          <Graph />
+          {/* <Info data={stockData} /> */}
+          <Graph ticker={ticker} />
           <Tabs />
         </div>
         <div className="flex flex-col items-center w-[700px]">
-          <NewsPanel ticker={ticker} />
+          {/* <NewsPanel ticker={ticker} /> */}
         </div>
         <Footer />
       </div>
