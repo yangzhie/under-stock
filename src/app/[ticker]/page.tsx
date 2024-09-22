@@ -17,13 +17,15 @@ interface StockData {
   day_high: number;
   day_low: number;
   day_open: number;
-  year_high: number;
-  year_low: number;
+  "52_week_high": number;
+  "52_week_low": number;
   market_cap: number | null;
   close_price: number;
   day_change: number;
   volume: number;
   currency: string;
+  previous_close_price: number;
+  last_trade_time: Date;
 }
 
 export default function StockPage({ params }: { params: { ticker: string } }) {
@@ -44,7 +46,6 @@ export default function StockPage({ params }: { params: { ticker: string } }) {
           router.push("/404");
         } else {
           setStockData(data.data[0]);
-          // console.log(data.data[0]); //////////////////////////////////////////////////////////////////////
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,8 +63,8 @@ export default function StockPage({ params }: { params: { ticker: string } }) {
         </div>
         <div className="flex flex-col items-center">
           {/* <Info data={stockData} /> */}
-          <Graph ticker={ticker} />
-          <Tabs />
+          {/* <Graph ticker={ticker} /> */}
+          {/* <Tabs ticker={ticker} /> */}
         </div>
         <div className="flex flex-col items-center w-[700px]">
           {/* <NewsPanel ticker={ticker} /> */}
