@@ -1,5 +1,5 @@
 import React from "react";
-import ContinentStock from "../ContinentStock/ContinentStock";
+import ContinentStock from "../Tables/Tables";
 import SidePanel from "../SidePanel/SidePanel";
 
 function MainContent() {
