@@ -6,6 +6,7 @@ mongoose.connect(process.env.MONGO_URI);
 const User = require("./models/user.model");
 
 const jwt = require("jsonwebtoken");
+const { authToken } = require("./middlewares/authToken");
 
 const express = require("express");
 const app = express();
@@ -46,7 +47,7 @@ app.post("/register", async (req, res) => {
     const isUser = await User.findOne({ email });
 
     // Check if user already exists
-    if(isUser) {
+    if (isUser) {
         return res.status(400).json({ error: true, message: "Email already exists." });
     }
 
@@ -60,7 +61,7 @@ app.post("/register", async (req, res) => {
     const accessToken = jwt.sign({ newUser }, process.env.ACCESS_TOKEN, { expiresIn: "20m" });
 
     res.json({ error: false, newUser, accessToken, message: "User registered successfully." });
-})
+});
 
 // Login
 app.post("/login", async (req, res) => {
@@ -100,6 +101,22 @@ app.post("/login", async (req, res) => {
     } else {
         res.status(400).json({ error: true, message: { message: "Invalid email or password." } });
     }
+});
+
+// Get User
+app.get("/get-user", authToken, async (req, res) => {
+    // Get user object
+    const { user } = req.user;
+
+    // Get user from DB
+    const userDB = await User.findOne({ _id: user._id });
+
+    // Handle user not found
+    if (!userDB) {
+        return res.status(401).json({ error: true, message: "User not found." });
+    };
+
+    res.json({ user: userDB });
 });
 
 app.listen(port, () => {
