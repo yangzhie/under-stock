@@ -154,6 +154,25 @@ app.get("/:username/watchlist", authToken, async (req, res) => {
     }
 });
 
+// Delete Watchlist
+app.delete("/:username/watchlist/:watchlistId", authToken, async (req, res) => {
+    const { username, watchlistId } = req.params;
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: true, message: "User not found." });
+        } else {
+            user.watchlists = user.watchlists.filter((watchlist) => watchlist._id.toString() !== watchlistId);
+            await user.save();
+            res.status(200).json({ error: false, message: "Watchlist deleted successfully." });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: error, message: "Error deleting watchlist." });
+    }
+});
+
 // Listen on port
 app.listen(port, () => {
     console.log(`Server is now listening on port: ${port}`);
