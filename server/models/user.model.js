@@ -19,10 +19,19 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    watchlists: [watchlistSchema],
     createdOn: {
         type: Date,
         default: Date.now,
-    }
+    },
+});
+
+const watchlistSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    stocks: [{symbol: String, name: String}],
 });
 
 module.exports = mongoose.model("User", userSchema);
