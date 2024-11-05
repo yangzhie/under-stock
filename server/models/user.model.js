@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const watchlistSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    stocks: [{symbol: String, name: String}],
+});
+
 const userSchema = new Schema({
     username: {
         type: String,
@@ -24,14 +32,6 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-});
-
-const watchlistSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    stocks: [{symbol: String, name: String}],
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -119,6 +119,26 @@ app.get("/get-user", authToken, async (req, res) => {
     res.json({ user: userDB });
 });
 
+// Create Watchlist 
+app.post("/:username/watchlist", authToken, async (req, res) => {
+    const { username } = req.params;
+    const { name } = req.body;
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: true, message: "User not found." });
+        } else {
+            user.watchlists.push({ name, stocks: [] });
+            await user.save();
+            res.status(201).json({ error: false, message: "Watchlist created successfully." });
+        }
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Error creating a watchlist.", error });
+    }
+});
+
+// Listen on port
 app.listen(port, () => {
     console.log(`Server is now listening on port: ${port}`);
 });
