@@ -138,6 +138,22 @@ app.post("/:username/watchlist", authToken, async (req, res) => {
     }
 });
 
+// Getting Watchlists
+app.get("/:username/watchlist", authToken, async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: true, message: "User not found." });
+        } else {
+            res.json({ watchlists: user.watchlists });
+        }
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Error getting watchlists.", error });
+    }
+});
+
 // Listen on port
 app.listen(port, () => {
     console.log(`Server is now listening on port: ${port}`);
