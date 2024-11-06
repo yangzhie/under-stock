@@ -173,6 +173,30 @@ app.delete("/:username/watchlist/:watchlistId", authToken, async (req, res) => {
     }
 });
 
+// Add Stock
+app.post("/:username/watchlist/:watchlistId/stock", authToken, async (req, res) => {
+    const { username, watchlistId } = req.params;
+    const { symbol, name } = req.body;
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: true, message: "User not found." });
+        }
+
+        const watchlist = user.watchlists.find((watchlist) => watchlist._id.toString() === watchlistId);
+        if (!watchlist) {
+            return res.status(404).json({ error: true, message: "Watchlist not found." });
+        }
+
+        watchlist.stocks.push({ symbol, name });
+        await user.save();
+        res.status(200).json({ error: false, message: "Stock added to watchlist successfully.", watchlist });
+    } catch (error) {
+        res.status(500).json({ error: true, message: "Error adding stock to watchlist.", error });
+    }
+});
+
 // Listen on port
 app.listen(port, () => {
     console.log(`Server is now listening on port: ${port}`);
