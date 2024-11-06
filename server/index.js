@@ -21,10 +21,6 @@ app.use(cors({
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json()); 
 
-app.get("/", (req, res) => {
-    res.json({ message: "Hello" });
-});
-
 // Register
 app.post("/register", async (req, res) => {
     // Info from request body
